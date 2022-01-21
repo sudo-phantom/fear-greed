@@ -1,5 +1,6 @@
 import requests
 import json
+from datetime import date
 
 class Fear_Greed:
     '''class to Read from bitcoin fear and greed index'''
@@ -14,6 +15,8 @@ class Fear_Greed:
     def print_info():
         '''Method to print the data from  Fear and greed index for bitcoin'''
         uri = 'https://api.alternative.me/fng/?limit=2'
+        today = date.today()
+        d1 = today.strftime("%m/%d/%Y")
 
         r = requests.get(uri) 
         data = r.json()
@@ -25,5 +28,5 @@ class Fear_Greed:
         value = data['data'][0]['value']
         classification = data['data'][0]['value_classification']
         endline = "\n-----------------------------\n"
-        print(f"{name}\n\n\tFear level: {value}\n\tRating: {classification}\n\tTimestamp: {time}\n{endline}")
+        print(f"{name}\n\n\tFear level: {value}\n\tRating: {classification}\n\tTimestamp: {time}\n\tDate: {d1}\n{endline}")
 print(Fear_Greed.print_info())
